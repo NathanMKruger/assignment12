@@ -75,7 +75,7 @@ namespace csi281 {
 			T maximum = heap[0];
 			heap[0] = heap[heapSize];
 			heapSize = heapSize - 1;
-			maxHeapify(heap[0]);
+			maxHeapify(0);
 			return maximum;
         }
         
@@ -90,8 +90,9 @@ namespace csi281 {
         void push(T key) {
             // YOUR CODE HERE
 			heapSize = heapSize + 1;
+			
 			int i = heapSize - 1;
-			heap[i] = key;
+			heap.push_back(key);
 			while (i > 0 && heap[parent(i)] < heap[i])
 			{
 				swap (heap[i], heap[parent(i)]);
