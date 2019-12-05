@@ -61,7 +61,7 @@ namespace csi281 {
         // NOTE: Our heap starts at 0, not 1
         T peek() {
             // YOUR CODE HERE
-			return heap[0];
+			return heap[0]; //return value at start of the heap
         }
         
         // Remove the next element (max element) in the heap and return it
@@ -72,11 +72,11 @@ namespace csi281 {
         // after a pop.
         T pop() {
             // YOUR CODE HERE
-			T maximum = heap[0];
-			heap[0] = heap[heapSize - 1];
-			heapSize = heapSize - 1;
-			maxHeapify(0);
-			return maximum;
+			T maximum = heap[0]; //start of the heap should be the highest value. set to a max variable
+			heap[0] = heap[heapSize - 1]; //replace start of heap with end of heap
+			heapSize = heapSize - 1; //decrease heap size by one
+			maxHeapify(0); //call to maxHeapify function
+			return maximum; //return the max value from the old heap start stored in the variable
         }
         
         // Put a new element into the priority queue
@@ -89,14 +89,14 @@ namespace csi281 {
         // the end of the vector heap
         void push(T key) {
             // YOUR CODE HERE
-			heapSize = heapSize + 1;
+			heapSize = heapSize + 1; //increase heap size by one
 			
-			int i = heapSize - 1;
-			heap.push_back(key);
+			int i = heapSize - 1; //set a value to be the end of the heap
+			heap.push_back(key); //add new value "key" into the back of the heap
 			while (i > 0 && heap[parent(i)] < heap[i])
 			{
-				swap (heap[i], heap[parent(i)]);
-				i = parent(i);
+				swap (heap[i], heap[parent(i)]); //exchange heap location value with the location's parent's value
+				i = parent(i); //change i from being heapSize - 1 to the new parent
 			}
         }
         
@@ -120,23 +120,23 @@ namespace csi281 {
         // NOTE: Macros left() and right() are defined at the top of this file
         void maxHeapify(int i) {
             // YOUR CODE HERE
-			int largest;
-			  if (left(i) < heapSize && heap[left(i)] > heap[i])
+			int largest; //variable to keep track of the larger value
+			  if (left(i) < heapSize && heap[left(i)] > heap[i]) //left side isn't larger than the heap & the lefthand value is larger than current heap
 			  {
-				  largest = left(i);
+				  largest = left(i); //the larger value is to the left. keep going left through the tree
 			}
 			  else
 			  {
-				  largest = i;
+				  largest = i; //currently at the larger value
 			  }
-			  if (right(i) < heapSize && heap[right(i)] > heap[largest])
+			  if (right(i) < heapSize && heap[right(i)] > heap[largest]) //right side isn't larger than the heap & the righthand value is larger than current largest value
 			  {
-				  largest = right(i);
+				  largest = right(i); //larger value is to the right. keep going right through the tree
 			}
-			  if (largest != i)
+			  if (largest != i) //the current value being worked with is NOT the larger value
 			  {
-				  swap (heap[i], heap[largest]);
-				maxHeapify(largest);
+				swap (heap[i], heap[largest]); //exchange value of heap at location i with the location of the largest value
+				maxHeapify(largest); //recusively call maxHeapify with largest being sent in for "int i"
 			}
         }
         
