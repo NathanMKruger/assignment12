@@ -73,7 +73,7 @@ namespace csi281 {
         T pop() {
             // YOUR CODE HERE
 			T maximum = heap[0];
-			heap[0] = heap[heapSize];
+			heap[0] = heap[heapSize - 1];
 			heapSize = heapSize - 1;
 			maxHeapify(0);
 			return maximum;
@@ -121,7 +121,7 @@ namespace csi281 {
         void maxHeapify(int i) {
             // YOUR CODE HERE
 			int largest;
-			  if (left(i) <= heapSize && heap[left(i)] > heap[i])
+			  if (left(i) < heapSize && heap[left(i)] > heap[i])
 			  {
 				  largest = left(i);
 			}
@@ -129,7 +129,7 @@ namespace csi281 {
 			  {
 				  largest = i;
 			  }
-			  if (right(i) <= heapSize && heap[right(i)] > heap[largest])
+			  if (right(i) < heapSize && heap[right(i)] > heap[largest])
 			  {
 				  largest = right(i);
 			}
